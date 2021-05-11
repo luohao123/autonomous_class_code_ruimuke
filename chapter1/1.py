@@ -1,7 +1,7 @@
 import sys
 
-import cv2
-import numpy as np
+import cv2 # pip install opencv-python
+import numpy as np # pip install numpy
 
 
 # Grayscale Image
@@ -53,17 +53,21 @@ def convolve2D(image, kernel, padding=0, strides=1):
                             kernel * imagePadded[x: x + xKernShape, y: y + yKernShape]).sum()
                 except:
                     break
-
     return output
 
 
 if __name__ == '__main__':
     # Grayscale Image
-    image = processImage('Image.jpeg')
+    image = processImage('a.jpg')
+
+    cv2.imshow('gray', image)
+    cv2.waitKey(0)
 
     # Edge Detection Kernel
     kernel = np.array([[-1, -1, -1], [-1, 8, -1], [-1, -1, -1]])
 
     # Convolve and Save Output
     output = convolve2D(image, kernel, padding=2)
-    cv2.imwrite('2DConvolved.jpg', output)
+    cv2.imshow('2DConvolved', output)
+    cv2.imshow('ori', image)
+    cv2.waitKey(0)
