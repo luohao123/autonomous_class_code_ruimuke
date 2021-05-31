@@ -19,7 +19,7 @@ def convolve2D(image, kernel, padding=0, strides=1):
     xKernShape = kernel.shape[0]
     yKernShape = kernel.shape[1]
     xImgShape = image.shape[0]
-    yImgShape = image.shape[0]
+    yImgShape = image.shape[1]
 
     # Shape of Output Convolution
     xOutput = int(((xImgShape - xKernShape + 2 * padding) / strides) + 1)
