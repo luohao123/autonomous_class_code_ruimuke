@@ -1,0 +1,3 @@
+[submodule "models/ops/DCNv2"]
+	path = models/ops/DCNv2
+	url = https://github.com/jinfagang/DCNv2_latest
