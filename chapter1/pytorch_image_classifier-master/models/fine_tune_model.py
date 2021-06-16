@@ -20,6 +20,36 @@ from torchvision import models
 from torch import nn
 from alfred.dl.torch.common import device
 
+
+
+class NewbieNet(nn.Module):
+
+    def __init__(self, n_classes=10):
+        super(NewbieNet, self).__init__()
+
+        self.n_classes = n_classes
+
+        self.conv1 = nn.Conv2d(3, 128, 3)
+        self.relu1 = nn.ReLU()
+        self.conv2 = nn.Conv2d(128, 512, 3)
+        self.relu2 = nn.ReLU()
+
+        self.f1 = nn.Flatten()
+        self.l1 = nn.Linear(512, self.n_classes)
+
+    
+    def forward(self, x):
+        x = self.conv1(x)
+        x = self.relu1(x)
+        x = self.conv2(x)
+        x = self.relu2(x)
+        x = self.f1(x)
+        x = self.l1(x)
+        print(x.shape)
+        return x
+
+
+
 def fine_tune_model():
     model_ft = models.resnet18(pretrained=True)
     num_features = model_ft.fc.in_features
