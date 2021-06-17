@@ -10,7 +10,8 @@ import cv2
 from alfred.vis.image.common import get_unique_color_by_id
 import numpy as np
 import random
-
+import glob
+import os
 
 COCO_INSTANCE_CATEGORY_NAMES = [
     '__background__', 'person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus',
@@ -59,7 +60,7 @@ def instance_segmentation_api(img_path, threshold=0.5, rect_th=3, text_size=3, t
     cv2.waitKey(0)
 
 
-def get_prediction(img_path, model, threshold):
+def get_prediction(img_path, threshold):
     img = Image.open(img_path)
     transform = T.Compose([T.ToTensor()])
     img = transform(img)
@@ -78,4 +79,6 @@ def get_prediction(img_path, model, threshold):
 
 
 if __name__ == '__main__':
-    instance_segmentation_api('')
+    imgs = glob.glob(os.path.join('images/*.png'))
+    for img in imgs:
+        instance_segmentation_api(img)
